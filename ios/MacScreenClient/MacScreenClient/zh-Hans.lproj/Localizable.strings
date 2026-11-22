@@ -1,0 +1,69 @@
+/* LAN Mac Controller - 简体中文 */
+
+/* App */
+"app_name" = "局域网 Mac 控制";
+"connecting" = "连接中…";
+"connected_fmt" = "已连接";
+"closed_fmt" = "连接已断开 ";
+"disconnected" = "已断开";
+"discovering" = "正在搜索局域网内的 Mac 助手…";
+"mock_suffix" = "（模拟画面）";
+"mock_permission_toast" = "模拟采集模式：画面为测试图案，输入为模拟注入。";
+
+/* Connect page */
+"section_discovered" = "局域网内发现";
+"section_manual" = "手动连接";
+"status_line" = "状态";
+"status_idle" = "待连接";
+"field_host" = "主机地址";
+"field_port" = "端口（默认 9700）";
+"field_token" = "配对令牌";
+"pair_qr" = "扫描配对二维码";
+"connect" = "连接";
+"need_token" = "需要令牌";
+"nav_settings" = "设置";
+"err_missing_pairing" = "缺少地址/端口/令牌——请先扫 Mac 端配对二维码";
+"err_bad_qr" = "不是 MacScreen 配对二维码";
+"err_camera_unavailable" = "相机不可用——请在连接页手动输入地址/端口/令牌。";
+
+/* Settings */
+"section_voice_engine" = "语音输入";
+"voice_engine" = "识别引擎";
+"engine_local" = "本机识别";
+"engine_cloud" = "云端大模型";
+"cloud_url" = "转写 API 地址";
+"cloud_key" = "API 密钥";
+"cloud_model" = "模型（如 whisper-1）";
+"cloud_style" = "接口风格";
+"style_openai" = "OpenAI 兼容";
+"style_raw" = "直接 WAV";
+"voice_local_desc" = "使用 iOS 内置语音识别，语言跟随系统语言。";
+"voice_cloud_desc" = "录 16 kHz 单声道 WAV 并上传到可配置的转写 API。";
+"voice_submit" = "发送后自动回车";
+"device_name" = "设备名称";
+"section_about" = "关于";
+
+/* Viewer toolbar（图标语义标签，与 Android contentDescription 一致） */
+"cd_submit" = "发送后自动回车";
+"cd_multiline" = "多行编辑";
+"cd_voice" = "语音输入";
+"cd_windows" = "窗口列表";
+"cd_rotate" = "横竖屏切换";
+"cd_disconnect" = "断开连接";
+"cd_reset_zoom" = "还原缩放";
+"cd_singleline" = "返回查看";
+"cd_send" = "发送";
+
+/* Viewer misc */
+"windows_empty" = "没有找到窗口";
+"window_untitled" = "未命名";
+"no_capture_permission" = "Mac 没有屏幕录制权限——请在系统偏好设置中授权";
+"cancel" = "取消";
+
+/* Voice */
+"voice_listening" = "正在聆听…";
+"voice_overlay_hint" = "点击任意处结束，结果将插入文本光标位置。";
+"err_no_mic_permission" = "麦克风权限被拒绝——请在系统设置中开启";
+"err_no_speech_permission" = "语音识别未授权——请在系统设置中开启";
+"err_speech_unavailable" = "当前语言没有可用的语音识别服务";
+"err_cloud_url_empty" = "请先在设置中配置云端转写地址";

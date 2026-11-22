@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0000000000000000000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000001; };
+		AA0000000000000000000002 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000002; };
+		AA0000000000000000000003 /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000003; };
+		AA0000000000000000000004 /* MacClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000004; };
+		AA0000000000000000000005 /* DiscoveryBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000005; };
+		AA0000000000000000000006 /* ScreenCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000006; };
+		AA0000000000000000000007 /* ScreenViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000007; };
+		AA0000000000000000000008 /* MultilineEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000008; };
+		AA0000000000000000000009 /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000009; };
+		AA0000000000000000000010 /* CloudPoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000010; };
+		AA0000000000000000000011 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000011; };
+		AA0000000000000000000012 /* QRScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000012; };
+		AA0000000000000000000013 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000013; };
+		AA0000000000000000000014 /* ProtocolFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000014; };
+		AA0000000000000000000015 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000015; };
+		AA0000000000000000000016 /* MouseMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000016; };
+		AA0000000000000000000017 /* GestureClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000017; };
+		AA0000000000000000000018 /* PairingUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000018; };
+		AA0000000000000000000019 /* VoiceCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000019; };
+		AA0000000000000000000020 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000020; };
+		AA0000000000000000000021 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB0000000000000000000021 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AB0000000000000000000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AB0000000000000000000002 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		AB0000000000000000000003 /* SessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionModel.swift; sourceTree = "<group>"; };
+		AB0000000000000000000004 /* MacClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacClient.swift; sourceTree = "<group>"; };
+		AB0000000000000000000005 /* DiscoveryBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryBrowser.swift; sourceTree = "<group>"; };
+		AB0000000000000000000006 /* ScreenCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCanvas.swift; sourceTree = "<group>"; };
+		AB0000000000000000000007 /* ScreenViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenViewer.swift; sourceTree = "<group>"; };
+		AB0000000000000000000008 /* MultilineEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineEditor.swift; sourceTree = "<group>"; };
+		AB0000000000000000000009 /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
+		AB0000000000000000000010 /* CloudPoster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPoster.swift; sourceTree = "<group>"; };
+		AB0000000000000000000011 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
+		AB0000000000000000000012 /* QRScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanView.swift; sourceTree = "<group>"; };
+		AB0000000000000000000013 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AB0000000000000000000014 /* ProtocolFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../../mac/MacScreen/Sources/MacScreenCore/Protocol/ProtocolFrame.swift"; sourceTree = "<group>"; };
+		AB0000000000000000000015 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../../mac/MacScreen/Sources/MacScreenCore/Protocol/Messages.swift"; sourceTree = "<group>"; };
+		AB0000000000000000000016 /* MouseMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../CoreLogic/Sources/CoreLogic/MouseMath.swift"; sourceTree = "<group>"; };
+		AB0000000000000000000017 /* GestureClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../CoreLogic/Sources/CoreLogic/GestureClassifier.swift"; sourceTree = "<group>"; };
+		AB0000000000000000000018 /* PairingUri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../CoreLogic/Sources/CoreLogic/PairingUri.swift"; sourceTree = "<group>"; };
+		AB0000000000000000000019 /* VoiceCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "../CoreLogic/Sources/CoreLogic/VoiceCodec.swift"; sourceTree = "<group>"; };
+		AB0000000000000000000020 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AB0000000000000000000022 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AB0000000000000000000023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		AB0000000000000000000030 /* MacScreenClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MacScreenClient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC0000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AD0000000000000000000001 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				AD0000000000000000000002 /* MacScreenClient */,
+				AD0000000000000000000003 /* MacScreenCore shared */,
+				AD0000000000000000000004 /* CoreLogic shared */,
+				AD0000000000000000000005 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AD0000000000000000000002 /* MacScreenClient */ = {
+			isa = PBXGroup;
+			children = (
+				AB0000000000000000000001 /* AppDelegate.swift */,
+				AB0000000000000000000002 /* AppSettings.swift */,
+				AB0000000000000000000003 /* SessionModel.swift */,
+				AB0000000000000000000004 /* MacClient.swift */,
+				AB0000000000000000000005 /* DiscoveryBrowser.swift */,
+				AB0000000000000000000006 /* ScreenCanvas.swift */,
+				AB0000000000000000000007 /* ScreenViewer.swift */,
+				AB0000000000000000000008 /* MultilineEditor.swift */,
+				AB0000000000000000000009 /* VoiceManager.swift */,
+				AB0000000000000000000010 /* CloudPoster.swift */,
+				AB0000000000000000000011 /* ConnectView.swift */,
+				AB0000000000000000000012 /* QRScanView.swift */,
+				AB0000000000000000000013 /* SettingsView.swift */,
+				AB0000000000000000000020 /* LaunchScreen.storyboard */,
+				AB0000000000000000000021 /* Localizable.strings */,
+			);
+			path = MacScreenClient;
+			sourceTree = "<group>";
+		};
+		AD0000000000000000000003 /* MacScreenCore shared */ = {
+			isa = PBXGroup;
+			children = (
+				AB0000000000000000000014 /* ProtocolFrame.swift */,
+				AB0000000000000000000015 /* Messages.swift */,
+			);
+			name = "MacScreenCore shared";
+			sourceTree = "<group>";
+		};
+		AD0000000000000000000004 /* CoreLogic shared */ = {
+			isa = PBXGroup;
+			children = (
+				AB0000000000000000000016 /* MouseMath.swift */,
+				AB0000000000000000000017 /* GestureClassifier.swift */,
+				AB0000000000000000000018 /* PairingUri.swift */,
+				AB0000000000000000000019 /* VoiceCodec.swift */,
+			);
+			name = "CoreLogic shared";
+			sourceTree = "<group>";
+		};
+		AD0000000000000000000005 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB0000000000000000000030 /* MacScreenClient.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AE0000000000000000000001 /* MacScreenClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF0000000000000000000003;
+			buildPhases = (
+				AE0000000000000000000002 /* Sources */,
+				AC0000000000000000000001 /* Frameworks */,
+				AE0000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacScreenClient;
+			productName = MacScreenClient;
+			productReference = AB0000000000000000000030 /* MacScreenClient.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AE0000000000000000000010 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					AE0000000000000000000001 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+				};
+			};
+			buildConfigurationList = AF0000000000000000000005;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = AD0000000000000000000001;
+			productRefGroup = AD0000000000000000000005 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AE0000000000000000000001 /* MacScreenClient */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AE0000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000000000000000000020 /* LaunchScreen.storyboard in Resources */,
+				AA0000000000000000000021 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AE0000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000000000000000000001 /* AppDelegate.swift in Sources */,
+				AA0000000000000000000002 /* AppSettings.swift in Sources */,
+				AA0000000000000000000003 /* SessionModel.swift in Sources */,
+				AA0000000000000000000004 /* MacClient.swift in Sources */,
+				AA0000000000000000000005 /* DiscoveryBrowser.swift in Sources */,
+				AA0000000000000000000006 /* ScreenCanvas.swift in Sources */,
+				AA0000000000000000000007 /* ScreenViewer.swift in Sources */,
+				AA0000000000000000000008 /* MultilineEditor.swift in Sources */,
+				AA0000000000000000000009 /* VoiceManager.swift in Sources */,
+				AA0000000000000000000010 /* CloudPoster.swift in Sources */,
+				AA0000000000000000000011 /* ConnectView.swift in Sources */,
+				AA0000000000000000000012 /* QRScanView.swift in Sources */,
+				AA0000000000000000000013 /* SettingsView.swift in Sources */,
+				AA0000000000000000000014 /* ProtocolFrame.swift in Sources */,
+				AA0000000000000000000015 /* Messages.swift in Sources */,
+				AA0000000000000000000016 /* MouseMath.swift in Sources */,
+				AA0000000000000000000017 /* GestureClassifier.swift in Sources */,
+				AA0000000000000000000018 /* PairingUri.swift in Sources */,
+				AA0000000000000000000019 /* VoiceCodec.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AB0000000000000000000021 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB0000000000000000000022 /* en */,
+				AB0000000000000000000023 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AF0000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AF0000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AF0000000000000000000004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MacScreenClient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.macscreen.client.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AF0000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MacScreenClient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.macscreen.client.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AF0000000000000000000003 /* Build configuration list for PBXNativeTarget "MacScreenClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF0000000000000000000004 /* Debug */,
+				AF0000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF0000000000000000000005 /* Build configuration list for PBXProject "MacScreenClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF0000000000000000000001 /* Debug */,
+				AF0000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AE0000000000000000000010 /* Project object */;
+}

@@ -1,0 +1,69 @@
+/* LAN Mac Controller - English (default) */
+
+/* App */
+"app_name" = "LAN Mac Controller";
+"connecting" = "Connecting…";
+"connected_fmt" = "Connected";
+"closed_fmt" = "Disconnected ";
+"disconnected" = "Disconnected";
+"discovering" = "Searching for Mac agents on LAN…";
+"mock_suffix" = " (mock capture)";
+"mock_permission_toast" = "Mock capture mode: test pattern, input is simulated.";
+
+/* Connect page */
+"section_discovered" = "Discovered on LAN";
+"section_manual" = "Manual connect";
+"status_line" = "Status";
+"status_idle" = "Idle";
+"field_host" = "Host";
+"field_port" = "Port (default 9700)";
+"field_token" = "Pairing token";
+"pair_qr" = "Scan pairing QR code";
+"connect" = "Connect";
+"need_token" = "token needed";
+"nav_settings" = "Settings";
+"err_missing_pairing" = "Missing host/port/token — scan the QR on Mac first";
+"err_bad_qr" = "Not a MacScreen pairing QR code";
+"err_camera_unavailable" = "Camera unavailable — enter host/port/token manually on the connect page.";
+
+/* Settings */
+"section_voice_engine" = "Voice input";
+"voice_engine" = "Engine";
+"engine_local" = "On-device";
+"engine_cloud" = "Cloud LLM";
+"cloud_url" = "Transcribe API URL";
+"cloud_key" = "API key";
+"cloud_model" = "Model (e.g. whisper-1)";
+"cloud_style" = "API style";
+"style_openai" = "OpenAI compatible";
+"style_raw" = "Raw WAV";
+"voice_local_desc" = "Uses iOS built-in speech recognition; language follows system language.";
+"voice_cloud_desc" = "Records 16 kHz mono WAV and uploads to a configurable transcription API.";
+"voice_submit" = "Auto-enter after send";
+"device_name" = "Device name";
+"section_about" = "About";
+
+/* Viewer toolbar (icon labels, align with Android contentDescription) */
+"cd_submit" = "Send with Enter";
+"cd_multiline" = "Multiline editor";
+"cd_voice" = "Voice input";
+"cd_windows" = "Window list";
+"cd_rotate" = "Rotate screen";
+"cd_disconnect" = "Disconnect";
+"cd_reset_zoom" = "Reset zoom";
+"cd_singleline" = "Back to viewer";
+"cd_send" = "Send";
+
+/* Viewer misc */
+"windows_empty" = "No windows found";
+"window_untitled" = "Untitled";
+"no_capture_permission" = "Mac has no screen-recording permission — grant it in System Preferences";
+"cancel" = "Cancel";
+
+/* Voice */
+"voice_listening" = "Listening…";
+"voice_overlay_hint" = "Tap anywhere to stop. Result is inserted at the cursor.";
+"err_no_mic_permission" = "Microphone permission denied — enable it in Settings";
+"err_no_speech_permission" = "Speech recognition not authorized — enable it in Settings";
+"err_speech_unavailable" = "Speech recognition unavailable for this language";
+"err_cloud_url_empty" = "Configure the cloud transcription URL in Settings first";

@@ -85,3 +85,26 @@
       白 tint 在白色输入条上不可见（改深色 0xFF333333）。e2e 目视验收：查看模式
       6 图标 + 深色发送、多行模式 4 图标 + 蓝底发送、pinch 缩放 ↺ 出现/还原消失，
       全部清晰无渲染异常；:core:test 47 tests 通过，APK 同步 dist。
+- [x] T39 iOS 客户端：把 Android 端功能迁移到 iOS（部署目标 iOS 13.0，只用 13 时代
+      API 不用 14+ 特性；SwiftUI + UIKit 组件混编，AppDelegate 生命周期）。结构：
+      ios/CoreLogic 独立 Swift Package（纯逻辑可 macOS swift test：MouseMath 坐标映射、
+      GestureClassifier 手势分类、PairingUri 配对解析、RequestsBuilder 请求构造、
+      VoiceCodec WAV/multipart）；app 工程引用 CoreLogic 源文件 + mac 端
+      ProtocolFrame.swift/Messages.swift 协议层复用。功能对齐 Android：Bonjour 发现
+      （NWBrowser _macscreen._tcp）、扫码配对（AVCaptureMetadataOutput）、手动连接、
+      MJPEG 投屏渲染（UIImageView 换帧）、单击/双击/长按右键/拖动/捏合缩放平移
+      （本地变换+归一化坐标发送）、浮动工具栏 7 按钮（SF Symbols iOS 13 可用图标）、
+      单行输入条 >3 行自动切全屏多行（UITextView）、长按文本框进语音、本地
+      （SFSpeechRecognizer）+ 云端（WAV multipart OpenAI 兼容）双引擎、语音插光标、
+      窗口列表激活、15s ping/断线重连/帧停重订阅、中英双语、e2e（模拟器连 mock
+      agent 9730 全功能自动化断言）。
+      完成（2026-11-23）：CoreLogic 29 tests 全过；xcodebuild 模拟器构建通过；
+      e2e 全绿（connected→帧流 5fps→mouse click 0.5,0.5→type-text 中文→windows→done
+      frames=27，mock agent 日志确认设备连接与视频订阅）；截图目视验收通过（深色
+      mock 画面居中、底部 6 图标工具栏、白色输入条+纸飞机）。过程中修 4 个 bug：
+      握手超时与 queue 回调竞态致 force-unwrap 崩溃（NSLock+只完成一次去重）、
+      e2e token 用错（agent 未采纳 --token，改读 info.json 真值）、SwiftUITextView
+      representable 在 iOS 13~15 不采 intrinsicContentSize 致输入条撑满全屏白屏
+      （改 SwiftUI 层行数回调驱动 .frame(height:)）、纸飞机黑色图标浮在深色画布
+      不可见（白底提到 HStack 整条）。新增 scripts/ios-build.sh 并接入 build.sh/
+      clean.sh，dist/MacScreenClient.app（模拟器包）。真机部署：Xcode 自动签名。

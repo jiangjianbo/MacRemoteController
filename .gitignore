@@ -11,5 +11,8 @@ android/MacScreenClient/local.properties
 android/MacScreenClient/.idea/
 android/MacScreenClient/app/build/
 android/MacScreenClient/core/build/
+ios/MacScreenClient/build/
+ios/CoreLogic/.build/
+ios/CoreLogic/.swiftpm/
 tools/
 dist/

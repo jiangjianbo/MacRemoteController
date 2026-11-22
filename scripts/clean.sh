@@ -20,6 +20,12 @@ rm -rf "$ROOT/android/MacScreenClient/.gradle" \
        "$ROOT/android/MacScreenClient/app/build" \
        "$ROOT/android/MacScreenClient/local.properties"
 
+echo "---- iOS ----"
+rm -rf "$ROOT/ios/MacScreenClient/build" \
+       "$ROOT/ios/CoreLogic/.build" "$ROOT/ios/CoreLogic/.swiftpm"
+# DerivedData 里的 MacScreenClient 构建目录（仅清本项目的，不动其他项目）
+rm -rf ~/Library/Developer/Xcode/DerivedData/MacScreenClient-* 2>/dev/null || true
+
 echo "---- 归集产物 ----"
 rm -rf "$ROOT/dist"
 

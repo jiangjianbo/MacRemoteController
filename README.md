@@ -1,6 +1,6 @@
 # LAN-Mac-Controller
 
-（原名 MacScreen）局域网内把 Mac 屏幕投到 Android 手机，并在手机上控制 Mac：模拟鼠标（点击/双击/右键/拖动）、向 Mac 焦点窗口发送文字（键盘输入或语音转文字）、激活指定窗口。仅接受**同一局域网同网段**的连接，公网一律拒绝。
+（原名 MacScreen）局域网内把 Mac 屏幕投到 Android/iOS 手机，并在手机上控制 Mac：模拟鼠标（点击/双击/右键/拖动）、向 Mac 焦点窗口发送文字（键盘输入或语音转文字）、激活指定窗口。仅接受**同一局域网同网段**的连接，公网一律拒绝。
 
 ## 组成
 
@@ -8,6 +8,7 @@
 |---|---|---|
 | Mac 端 | Swift 5.6 / SwiftPM（Network.framework、CGDisplay、CGEvent、CoreImage、launchd、NSMenu） | `mac/MacScreen/` |
 | Android 端 | Kotlin（`:core` 纯 JVM + `:app` Android；NsdManager、SpeechRecognizer、CameraX + ML Kit） | `android/MacScreenClient/` |
+| iOS 端 | Swift/SwiftUI（部署目标 iOS 13.0；`CoreLogic` 跨平台纯 Swift + `MacScreenClient` app；SFSpeechRecognizer、AVFoundation QR、NWConnection/NWBrowser） | `ios/` |
 | 脚本 | 统一 build/clean、开发期 start/stop、端到端测试 | `scripts/` + 根目录垫片 |
 
 设计原则：**尽量使用操作系统内置能力，不自己造轮子**。录屏用 CGDisplayCreateImage 快照流，鼠标键盘用 CGEvent 注入，服务发现用 Bonjour/NsdManager，扫码用 CoreImage / ML Kit，开机启动用 launchd LaunchAgents，语音转文字用手机内置 SpeechRecognizer 或用户自配的云端大模型接口。
@@ -90,6 +91,21 @@ macscreen-agent [--daemon] [--port N] [--mock-capture] [--mock-input]
 7. 多语言：界面自动跟随系统语言（内置简体中文与英文，其余语言回退英文）；全部按钮图标化并附 contentDescription（无障碍服务可读）。
 8. 熄屏休眠再解锁后自动重连恢复画面（熄屏期间 ping 被系统推迟，连接可能被 Mac 端空闲看门狗掐断）。
 
+## 快速开始（iOS 端）
+
+功能与 Android 端对齐：投屏 + 手势控制、文字/语音发送、窗口列表、自动发现、扫码连接。部署目标 **iOS 13.0**（2019 年 iPhone 6s 起的全部机型均可安装），无 iOS 14+ 专属 API。
+
+```bash
+./ios-build.sh              # CoreLogic 单测（29 tests）+ 模拟器构建 → ios/MacScreenClient/build/MacScreenClient.app
+./build.sh                  # 统一构建会自动带上 iOS（--skip-ios 可跳过）
+```
+
+- **模拟器**：`xcrun simctl install booted dist/MacScreenClient.app` 后即可连本机 mock agent 验证全链路。
+- **真机**：Xcode 打开 `ios/MacScreenClient/MacScreenClient.xcodeproj`，在 Signing & Capabilities 勾选「Automatically manage signing」并选择个人 Apple ID 团队，插上手机 Run。（免费账号签名 7 天有效；无需付费开发者账号。）
+- **模拟器限制**：扫码（相机）与语音识别（麦克风）需真机；模拟器上可用手动 IP/端口/令牌连接，e2e 用 `-autoConnectHost/-autoConnectPort/-autoConnectToken` 启动参数直连。
+
+iOS e2e（模拟器自动化）：启动 mock agent（`--mock-capture --mock-input`），带参数启动 app 后自动连接并执行脚本（点击画面中心 → 发送文字 → 拉窗口列表），事件写入 app 容器 `Documents/e2e.log`，另有首帧 JPEG 与视图层级 dump 供渲染诊断。
+
 ## 协议摘要
 
 二进制帧（两端字节级一致，含互操作单测向量）：
@@ -112,6 +128,8 @@ QR 内容：`macscreen://connect?host=..&port=..&token=..&name=..`。
 |---|---|---|
 | Mac 单测 | `cd mac/MacScreen && swift test` | 86 tests, 0 failures（含 FileShare 回环下载集成测试） |
 | Android core 单测 | `scripts/android-build.sh`（`:core:test`） | 38 tests, 0 failures |
+| iOS CoreLogic 单测 | `scripts/ios-build.sh`（`swift test`） | 29 tests, 0 failures（帧协议/鼠标映射/手势分类跨平台向量） |
+| iOS e2e | mock agent + 模拟器自动连接脚本 | connected/帧流/鼠标/文字/窗口列表断言全绿 |
 | 端到端 | `./scripts/e2e.sh`（真实 TCP：mock Agent ↔ PhoneSimulator） | HTTP 下载 1 + 正向 13 + 反向 2 断言全过 |
 
 Mock 策略：两端核心逻辑均可在无硬件/无权限环境下验证（MockFrameSource、MockInputInjector、MockWindowService、FakeConnection、PipeTransport、FakeHttpPoster 等）。
@@ -119,6 +137,7 @@ Mock 策略：两端核心逻辑均可在无硬件/无权限环境下验证（Mo
 ## 人工验证清单（自动化覆盖不到的部分）
 
 - [ ] Mac 端「系统设置 → 隐私与安全性 → 屏幕录制」授权后，真实画面出现在手机。
+- [ ] iOS 真机：自动签名安装成功，扫码连接 / 本地语音识别在真机上可用（模拟器无法验证相机与麦克风）。
 - [ ] 菜单栏二维码窗口可被手机扫中并一键连接。
 - [ ] 手机浏览器扫「手机扫码下载 APK」二维码，经局域网下载 APK 并可安装（对照文件大小）。
 - [ ] 手机点击能激活 Mac 上的目标窗口并落到正确位置（对照 Mac 屏幕验证坐标）。

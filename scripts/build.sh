@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
-# 统一构建脚本：Mac 端（release + debug，均 universal 双架构）+ 单元测试 + Android 端（尽力而为）
+# 统一构建脚本：Mac 端（release + debug，均 universal 双架构）+ 单元测试 + Android 端（尽力而为）+ iOS 端（尽力而为）
 # 产物：
 #   dist/MacScreenAgent                    release 裸二进制（universal，供脚本/e2e 使用）
 #   dist/LAN-Mac-Controller.app            release 标准应用包（Finder 双击启动，无终端窗口）
 #   dist/LAN-Mac-Controller-debug.app      debug   标准应用包（开发调试用）
 #   dist/LAN-Mac-Controller-debug.apk      Android 客户端
-# 用法: scripts/build.sh [--skip-tests] [--skip-android] [--with-android-app]
+#   dist/MacScreenClient.app               iOS 模拟器客户端（真机用 Xcode 打开 ios/MacScreenClient 构建）
+# 用法: scripts/build.sh [--skip-tests] [--skip-android] [--skip-ios] [--with-android-app]
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SKIP_TESTS=0; SKIP_ANDROID=0; WITH_APP=0
+SKIP_TESTS=0; SKIP_ANDROID=0; SKIP_IOS=0; WITH_APP=0
 for arg in "$@"; do
   case "$arg" in
     --skip-tests) SKIP_TESTS=1 ;;
     --skip-android) SKIP_ANDROID=1 ;;
+    --skip-ios) SKIP_IOS=1 ;;
     --with-android-app) WITH_APP=1 ;;
   esac
 done
@@ -102,11 +104,18 @@ if [[ $SKIP_TESTS -eq 0 ]]; then
   (cd "$MAC_DIR" && swift test 2>&1 | grep -E "Executed .* tests," | tail -1)
 fi
 
-echo "==== [3/3] Android 端 ===="
+echo "==== [3/4] Android 端 ===="
 if [[ $SKIP_ANDROID -eq 1 ]]; then
   echo "跳过（--skip-android）"
 else
   bash "$ROOT/scripts/android-build.sh" $([[ $WITH_APP -eq 1 ]] && echo --with-app || true) || true
+fi
+
+echo "==== [4/4] iOS 端 ===="
+if [[ $SKIP_IOS -eq 1 ]]; then
+  echo "跳过（--skip-ios）"
+else
+  bash "$ROOT/scripts/ios-build.sh" || true
 fi
 
 echo "==== 归集产物到 dist/ ===="
@@ -158,6 +167,14 @@ if [[ -f "$APK" ]]; then
   echo "dist/LAN-Mac-Controller-debug.apk  ← android/.../apk/debug/app-debug.apk"
 else
   echo "提示：无 Android APK（未装 SDK 或未加 --with-android-app）"
+fi
+
+IOS_APP="$ROOT/ios/MacScreenClient/build/MacScreenClient.app"
+if [[ -d "$IOS_APP" ]]; then
+  cp -R "$IOS_APP" "$DIST/MacScreenClient.app"
+  echo "dist/MacScreenClient.app  ← iOS 模拟器包（真机用 Xcode 打开 ios/MacScreenClient 自动签名构建）"
+else
+  echo "提示：无 iOS 包（未装 Xcode 或 --skip-ios）"
 fi
 
 echo "==== 构建完成 ===="

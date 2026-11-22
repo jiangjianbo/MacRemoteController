@@ -1,0 +1,15 @@
+.DS_Store
+.build/
+*.o
+logs/
+*.pid
+mac/MacScreen/.build/
+mac/MacScreen/.swiftpm/
+android/MacScreenClient/.gradle/
+android/MacScreenClient/build/
+android/MacScreenClient/local.properties
+android/MacScreenClient/.idea/
+android/MacScreenClient/app/build/
+android/MacScreenClient/core/build/
+tools/
+dist/

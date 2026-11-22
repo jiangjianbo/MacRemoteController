@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Default (English). zh-CN: values-zh/strings.xml -->
+<resources>
+    <string name="app_title">LAN-Mac-Controller</string>
+    <string name="main_subtitle">Enter Mac connection info or scan to pair</string>
+    <string name="discover_btn">Auto-discover Mac on LAN (Bonjour)</string>
+    <string name="manual_section">— Manual connect —</string>
+    <string name="hint_host">Mac address (e.g. 192.168.31.122)</string>
+    <string name="hint_port">Port (default 9700)</string>
+    <string name="hint_token">Pairing token (in Mac menu-bar QR window)</string>
+    <string name="btn_connect">Connect</string>
+    <string name="btn_qr_pair">Scan QR to pair</string>
+    <string name="btn_voice_settings">Voice &amp; advanced settings</string>
+    <string name="err_need_host_token">Please fill in address and token</string>
+    <string name="discovering">Discovering… (keep phone and Mac on the same Wi-Fi)</string>
+    <string name="found_item">%1$s  (%2$s:%3$s)  tap to connect</string>
+    <string name="found_selected">Selected %1$s — confirm token, then tap Connect</string>
+    <string name="found_count">Found %1$d Mac(s)</string>
+    <string name="qr_bad_content">Unrecognized QR content: %1$s</string>
+    <string name="qr_camera_permission">Camera permission is required for QR scanning</string>
+    <string name="qr_hint">Aim at the pairing-QR window in the Mac menu bar</string>
+    <string name="qr_camera_fail_fmt">Camera start failed: %1$s</string>
+
+    <string name="connecting">Connecting…</string>
+    <string name="connected_fmt">Connected %1$s</string>
+    <string name="mock_suffix">(Mac mock mode)</string>
+    <string name="screen_info_fmt"> · %1$s×%2$s pt</string>
+    <string name="reconnecting">Reconnecting…</string>
+    <string name="disconnected_fmt">Disconnected: %1$s</string>
+    <string name="auto_reconnecting">(reconnecting…)</string>
+    <string name="connect_failed_fmt">Connect failed: %1$s</string>
+    <string name="mock_permission_toast">Test screen: no screen-recording permission or mock mode. Re-grant the agent in System Settings → Privacy &amp; Security → Screen Recording, then fully restart it</string>
+    <string name="capture_denied_toast">Mac screen-recording permission not granted: showing the test screen</string>
+    <string name="waiting_screen">Waiting for screen…</string>
+
+    <string name="hint_input">Type here</string>
+    <string name="cd_send">Send</string>
+    <string name="cd_submit">Send with Enter</string>
+    <string name="cd_multiline">Multiline editor</string>
+    <string name="cd_singleline">Back to viewer</string>
+    <string name="cd_voice">Voice input</string>
+    <string name="cd_windows">Window list</string>
+    <string name="cd_rotate">Rotate screen</string>
+    <string name="cd_disconnect">Disconnect</string>
+    <string name="cd_reset_zoom">Reset zoom</string>
+
+    <string name="win_dialog_title">Choose a window to activate</string>
+    <string name="no_windows">No visible windows on Mac</string>
+    <string name="untitled">(untitled)</string>
+    <string name="sent_toast">Sent to focused Mac window</string>
+    <string name="send_failed_fmt">Send failed: %1$s</string>
+
+    <string name="voice_listening">Listening…</string>
+    <string name="voice_overlay_hint">Tap anywhere to stop — text goes to the cursor</string>
+    <string name="voice_too_short">Too short — tap the mic, then speak</string>
+    <string name="mic_permission_needed">Microphone permission is required for voice input</string>
+    <string name="prev_recording">Previous recording still processing — wait a second</string>
+    <string name="record_fail">Cannot record (microphone permission?)</string>
+    <string name="record_init_fail">Recorder init failed (check permission)</string>
+    <string name="cloud_not_configured">Cloud transcription not configured: fill the API URL in "Voice &amp; advanced settings", or switch to on-device</string>
+    <string name="cloud_fail_fmt">Cloud transcription failed: %1$s</string>
+    <string name="no_voice_result">No speech recognized — try again</string>
+    <string name="voice_no_result_fallback">Recognition returned nothing (vendor service may be unavailable); consider cloud transcription</string>
+    <string name="recognizer_create_fail_fmt">Cannot create recognizer (%1$s). Use cloud transcription</string>
+    <string name="local_no_service">No speech-recognition service on this device. Install Google "Speech Recognition &amp; Synthesis" or switch to cloud</string>
+    <string name="err_no_match">Didn\'t catch that</string>
+    <string name="err_speech_timeout">No speech detected</string>
+    <string name="err_mic_permission">Microphone permission missing (app and speech service both need it)</string>
+    <string name="err_network_timeout">Speech service network timeout (Google recognition needs access to Google services; use cloud in mainland China)</string>
+    <string name="err_client">Speech service error (on Xiaomi-like devices accept the voice agreement in Mi AI and unfreeze the service)</string>
+    <string name="err_server">Vendor speech server error (vendor cloud)</string>
+    <string name="err_lang_unsupported">Device speech service doesn\'t support Chinese (download the offline pack for Google services)</string>
+    <string name="err_generic_fmt">Recognition error code=%1$d</string>
+    <string name="local_unavailable_title">On-device recognition unavailable</string>
+    <string name="action_ok">OK</string>
+    <string name="action_use_cloud">Use cloud instead</string>
+    <string name="open_settings_fail">Cannot open the page — adjust it in system settings</string>
+    <string name="open_voice_settings_fail">Open "Voice &amp; advanced settings" from the main screen to switch to cloud</string>
+
+    <string name="settings_title">Voice settings</string>
+    <string name="settings_desc">Pick a speech-to-text engine (recognized text goes to the viewer input box for editing)</string>
+    <string name="engine_local">On-device (offline, Android built-in)</string>
+    <string name="engine_cloud">Cloud LLM transcription (OpenAI-compatible / custom API)</string>
+    <string name="hint_api_url">API URL (e.g. https://api.openai.com/v1/audio/transcriptions)</string>
+    <string name="hint_api_key">API key (optional)</string>
+    <string name="hint_model">Model (e.g. whisper-1)</string>
+    <string name="api_style">API style:</string>
+    <string name="style_openai">OpenAI-compatible (multipart)</string>
+    <string name="style_raw">Raw POST WAV</string>
+    <string name="submit_auto_return">Auto-return after send (submit)</string>
+    <string name="btn_save">Save settings</string>
+    <string name="saved">Saved</string>
+
+    <string name="diag_summary_none">On-device: unavailable — no recognition service registered</string>
+    <string name="diag_summary_default_unset">On-device: unavailable — no default recognition service set</string>
+    <string name="diag_summary_default_disabled">On-device: unavailable — default service (%1$s) disabled or frozen</string>
+    <string name="diag_summary_ok">On-device: available (default %1$s)</string>
+    <string name="diag_providers_none">none</string>
+    <string name="diag_providers_header">Recognition services installed: %1$s\nDefault voice recognition service: %2$s</string>
+    <string name="diag_default_unset">not set</string>
+    <string name="diag_default_unregistered_fmt">%1$s (no recognition service)</string>
+    <string name="diag_disabled_tag">  [disabled/frozen]</string>
+    <string name="diag_install_google">Install Google "Speech Recognition &amp; Synthesis" (package %1$s; needs Google framework/Play Store), then set it as the default voice input in system settings; or use cloud transcription (recommended)</string>
+    <string name="diag_tts_only">Google speech component detected but it provides no recognition service (TTS-only build or restricted). Enable it in app management, or use cloud transcription (recommended)</string>
+    <string name="diag_set_default">Go to Settings → More settings → Language &amp; input ("Default apps → digital assistant" on some ROMs) → "Voice input", and pick the installed service (e.g. Google). If it\'s missing, enable the component in app management. Also exempt the component from battery freezing and allow auto-start</string>
+    <string name="diag_hint_xiaomi">Vendor (Xiaomi) recognition: accept the voice agreement in Mi AI on first use; network required. "Speech service error" usually means the agreement isn\'t accepted yet</string>
+    <string name="diag_hint_google">Google recognition: its server must be reachable (mainland networks usually need a proxy), and the Chinese offline pack must be downloaded on first use (this app requests offline mode). Prefer cloud transcription on timeout/server errors</string>
+    <string name="diag_hint_vendor">Vendor recognition: on failure check its permissions and agreements; cloud transcription is also available</string>
+    <string name="diag_view_app">Inspect app</string>
+    <string name="diag_install">Install page</string>
+    <string name="diag_fix_set_default">Choose default service</string>
+</resources>

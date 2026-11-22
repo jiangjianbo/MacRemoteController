@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 中文（简体）。系统语言为中文时自动使用本文件。 -->
+<resources>
+    <string name="app_title">LAN-Mac-Controller</string>
+    <string name="main_subtitle">输入 Mac 端连接信息或扫码配对</string>
+    <string name="discover_btn">自动发现局域网 Mac（Bonjour）</string>
+    <string name="manual_section">— 手动连接 —</string>
+    <string name="hint_host">Mac 地址（如 192.168.31.122）</string>
+    <string name="hint_port">端口（默认 9700）</string>
+    <string name="hint_token">配对令牌（Mac 菜单栏二维码窗口可见）</string>
+    <string name="btn_connect">连接</string>
+    <string name="btn_qr_pair">扫码配对</string>
+    <string name="btn_voice_settings">语音与高级设置</string>
+    <string name="err_need_host_token">请填写地址与令牌</string>
+    <string name="discovering">正在发现…（确保手机与 Mac 在同一 Wi-Fi）</string>
+    <string name="found_item">%1$s  (%2$s:%3$s)  点击连接</string>
+    <string name="found_selected">已选择 %1$s，确认令牌后点连接</string>
+    <string name="found_count">发现 %1$d 台 Mac</string>
+    <string name="qr_bad_content">二维码内容无法识别：%1$s</string>
+    <string name="qr_camera_permission">需要相机权限才能扫码</string>
+    <string name="qr_hint">对准 Mac 菜单栏「配对二维码」窗口</string>
+    <string name="qr_camera_fail_fmt">相机启动失败：%1$s</string>
+
+    <string name="connecting">连接中…</string>
+    <string name="connected_fmt">已连接 %1$s</string>
+    <string name="mock_suffix">（Mac 端 Mock 模式）</string>
+    <string name="screen_info_fmt"> · %1$s×%2$s pt</string>
+    <string name="reconnecting">重连中…</string>
+    <string name="disconnected_fmt">已断开：%1$s</string>
+    <string name="auto_reconnecting">（自动重连中…）</string>
+    <string name="connect_failed_fmt">连接失败：%1$s</string>
+    <string name="mock_permission_toast">当前是测试画面：Mac 端无屏幕录制权限或开启了 Mock 模式。请在 Mac「系统设置→隐私与安全性→屏幕录制」重新勾选 Agent，并完全退出后重启</string>
+    <string name="capture_denied_toast">Mac 屏幕录制权限未授权：当前显示的是测试画面</string>
+    <string name="waiting_screen">等待画面…</string>
+
+    <string name="hint_input">请输入</string>
+    <string name="cd_send">发送</string>
+    <string name="cd_submit">发送后自动回车</string>
+    <string name="cd_multiline">多行编辑</string>
+    <string name="cd_singleline">返回查看界面</string>
+    <string name="cd_voice">语音输入</string>
+    <string name="cd_windows">窗口列表</string>
+    <string name="cd_rotate">横竖屏切换</string>
+    <string name="cd_disconnect">断开连接</string>
+    <string name="cd_reset_zoom">还原缩放</string>
+
+    <string name="win_dialog_title">选择要激活的窗口</string>
+    <string name="no_windows">Mac 端没有可见窗口</string>
+    <string name="untitled">（无标题）</string>
+    <string name="sent_toast">已发送到 Mac 焦点窗口</string>
+    <string name="send_failed_fmt">发送失败：%1$s</string>
+
+    <string name="voice_listening">正在聆听…</string>
+    <string name="voice_overlay_hint">点击任意位置结束，文字插入光标处</string>
+    <string name="voice_too_short">录音太短，点话筒后请正常说话</string>
+    <string name="mic_permission_needed">需要麦克风权限才能语音输入</string>
+    <string name="prev_recording">上一段录音还在处理中，请稍候一秒再按</string>
+    <string name="record_fail">无法录音（缺麦克风权限？）</string>
+    <string name="record_init_fail">录音初始化失败（检查权限）</string>
+    <string name="cloud_not_configured">云端转写未配置：请到「语音与高级设置」填写 API 地址（Key 可留空），或改用本地识别</string>
+    <string name="cloud_fail_fmt">云端转写失败：%1$s</string>
+    <string name="no_voice_result">没有识别到语音内容，请再试一次</string>
+    <string name="voice_no_result_fallback">语音识别没有返回结果（厂商语音服务可能不可用），建议到设置改用云端大模型转写</string>
+    <string name="recognizer_create_fail_fmt">无法创建语音识别器（%1$s）。请改用云端大模型转写</string>
+    <string name="local_no_service">本机没有语音识别服务。请安装 Google「Speech Recognition &amp; Synthesis」或改用云端转写</string>
+    <string name="err_no_match">没听清说话内容</string>
+    <string name="err_speech_timeout">未检测到语音</string>
+    <string name="err_mic_permission">缺麦克风权限（应用与语音服务都需要）</string>
+    <string name="err_network_timeout">识别服务网络超时（Google 语音识别需能访问谷歌服务，大陆网络建议改用云端转写）</string>
+    <string name="err_client">系统语音服务异常（小米等机型可能需先在小爱同学中同意语音协议，且该服务未被省电策略冻结）</string>
+    <string name="err_server">厂商语音服务端出错（走的是厂商云端）</string>
+    <string name="err_lang_unsupported">该机型语音服务不支持中文（Google 服务需先下载中文离线包）</string>
+    <string name="err_generic_fmt">识别错误 code=%1$d</string>
+    <string name="local_unavailable_title">手机本地识别不可用</string>
+    <string name="action_ok">知道了</string>
+    <string name="action_use_cloud">改用云端</string>
+    <string name="open_settings_fail">无法打开设置页，请手动到系统设置操作</string>
+    <string name="open_voice_settings_fail">请在主界面进入「语音与高级设置」切换为云端转写</string>
+
+    <string name="settings_title">语音设置</string>
+    <string name="settings_desc">选择语音转文字引擎（识别后的文字进入投屏页输入框，可编辑后手动发送）</string>
+    <string name="engine_local">手机本地识别（离线，Android 内置）</string>
+    <string name="engine_cloud">云端大模型转写（OpenAI 兼容 / 自定义接口）</string>
+    <string name="hint_api_url">API 地址（如 https://api.openai.com/v1/audio/transcriptions）</string>
+    <string name="hint_api_key">API Key（可留空）</string>
+    <string name="hint_model">模型名（如 whisper-1）</string>
+    <string name="api_style">接口风格：</string>
+    <string name="style_openai">OpenAI 兼容(multipart)</string>
+    <string name="style_raw">直接POST WAV</string>
+    <string name="submit_auto_return">发送后自动回车（submit）</string>
+    <string name="btn_save">保存设置</string>
+    <string name="saved">已保存</string>
+
+    <string name="diag_summary_none">本地识别：不可用——本机没有注册任何语音识别服务</string>
+    <string name="diag_summary_default_unset">本地识别：不可用——系统未设置默认语音识别服务</string>
+    <string name="diag_summary_default_disabled">本地识别：不可用——默认语音识别服务（%1$s）已禁用或冻结</string>
+    <string name="diag_summary_ok">本地识别：可用（默认服务 %1$s）</string>
+    <string name="diag_providers_none">无</string>
+    <string name="diag_providers_header">已安装的语音识别服务：%1$s\n系统默认语音识别服务：%2$s</string>
+    <string name="diag_default_unset">未设置</string>
+    <string name="diag_default_unregistered_fmt">%1$s（未注册识别服务）</string>
+    <string name="diag_disabled_tag">【已禁用/冻结】</string>
+    <string name="diag_install_google">请安装 Google「Speech Recognition &amp; Synthesis」应用（包名 %1$s，需谷歌服务框架/Play 商店支持），安装后在系统设置里把「语音输入」默认服务选为 Google；或改用云端大模型转写（不依赖本机组件，推荐）</string>
+    <string name="diag_tts_only">已检测到 Google 语音组件但它未提供识别服务（可能是纯 TTS 版本或被系统限制）。请在「设置→应用设置→应用管理」中确认其处于启用状态；或改用云端大模型转写（不依赖本机组件，推荐）</string>
+    <string name="diag_set_default">请到 系统设置→更多设置→语言与输入法（部分机型在「默认应用→数字助手」）→「语音输入/语音识别」，把默认服务选为已安装的服务（如 Google 语音识别）。若列表中没有目标项，先到应用管理确认对应组件已启用。省电策略可能冻结识别服务，建议把该组件设为「无限制」并允许自启动</string>
+    <string name="diag_hint_xiaomi">当前走小米厂商识别：首次使用需在小爱同学中同意语音服务协议，且需联网。若报「系统语音服务异常」多为协议未同意</string>
+    <string name="diag_hint_google">当前使用 Google 语音识别：识别服务端需要能访问谷歌网络（大陆网络通常需代理），且首次使用需在 Google 语音服务中下载中文离线包（本应用以离线模式调用）。若超时/服务端错误，建议改用云端大模型转写</string>
+    <string name="diag_hint_vendor">使用厂商识别服务：若失败请留意其权限与协议要求；也可改用云端大模型转写</string>
+    <string name="diag_view_app">查看该应用</string>
+    <string name="diag_install">去安装页</string>
+    <string name="diag_fix_set_default">去选择默认服务</string>
+</resources>

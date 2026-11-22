@@ -82,7 +82,7 @@ PLIST
   chmod +x "$app/Contents/MacOS/MacScreenAgent"
 }
 
-echo "==== [1/3] Mac 端 Swift 构建 (release + debug, universal) ===="
+echo "==== [1/4] Mac 端 Swift 构建 (release + debug, universal) ===="
 HOST_ARCH="$(uname -m)"
 
 # ---- release：裸二进制（脚本/e2e 用）+ .app 包（日常双击用）----

@@ -120,9 +120,14 @@
       注意：运行中的 agent 需重启才会用上新二进制（重建后首次投屏需重新
       勾选屏幕录制授权）。
 - [x] T41 GitHub Actions 发版：.github/workflows/release.yml（打 tag v* 或手动触发）。
-      macos-14 arm64 runner 复用 scripts/build.sh 一条龙（Mac universal 构建+91 单测、
-      Android :core:test+APK、iOS CoreLogic 29 单测+模拟器包、dist 归集）；CI 环境
-      用 setup-java(temurin 17) + setup-gradle(9.0.0，项目无 wrapper) + sdkmanager
-      补装 platforms;android-35/build-tools;35.0.0。产物 zip 化（裸二进制/release 应用包/
-      debug 应用包/APK/iOS 模拟器包，命名带版本号）+ SHA256SUMS.txt，gh release create
-      发 GitHub Release。首发 v0.1。
+      两段式：build（macos-15，复用 scripts/build.sh 一条龙：Mac universal 构建+91
+      单测、Android :core:test+APK、iOS CoreLogic 29 单测+模拟器包、dist 归集）→
+      publish（ubuntu，contents:write，download-artifact + gh release create）。
+      CI 环境用 setup-java(temurin 17) + setup-gradle(9.5.1，项目无 wrapper) +
+      sdkmanager 补装 platforms;android-35/build-tools;35.0.0。产物 zip 化（裸二进制/
+      release 应用包/debug 应用包/APK/iOS 模拟器包，命名带版本号）+ SHA256SUMS.txt。
+      **Release v0.1 已发布**（run 45250098839 全绿，agent zip 哈希校验一致）：
+      https://github.com/jiangjianbo/MacRemoteController/releases/tag/v0.1
+      排障 7 层记录见操作日志.md（permissions 拆分、macos-14 秒取消、iOS @StateObject
+      漏网、SE-0436 NSNumber 桥接、publish 无 git 上下文、macOS runner 排队取消、
+      XCTest 多次 fulfill 在 Xcode 16 严格化下崩溃）。

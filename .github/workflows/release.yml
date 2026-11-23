@@ -87,4 +87,5 @@ jobs:
         run: |
           V="${GITHUB_REF_NAME}"
           ls -la rel/
-          gh release create "$V" --title "MacScreen $V" --generate-notes rel/*
+          # publish job 无 checkout（无 git 上下文），必须显式指定仓库
+          gh release create "$V" -R "$GITHUB_REPOSITORY" --title "MacScreen $V" --generate-notes rel/*

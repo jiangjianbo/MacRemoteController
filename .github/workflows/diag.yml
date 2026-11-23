@@ -9,6 +9,6 @@ jobs:
     steps:
       - run: echo "ubuntu ok $(uname -a)"
   diag-macos:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - run: echo "macos-14 ok $(uname -a) && xcodebuild -version"

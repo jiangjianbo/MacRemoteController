@@ -101,7 +101,12 @@ DEBUG_MODE="$MERGE_MODE"
 
 if [[ $SKIP_TESTS -eq 0 ]]; then
   echo "==== [2/3] Mac 端单元测试 ===="
-  (cd "$MAC_DIR" && swift test 2>&1 | grep -E "Executed .* tests," | tail -1)
+  TEST_OUT="$(cd "$MAC_DIR" && swift test 2>&1)" || {
+    # 失败时输出详情（成功只留一行统计，避免刷屏）
+    echo "$TEST_OUT" | grep -E "error:|XCTAssert|failed:|Fatal" | head -30
+    exit 1
+  }
+  echo "$TEST_OUT" | grep -E "Executed .* tests," | tail -1
 fi
 
 echo "==== [3/4] Android 端 ===="

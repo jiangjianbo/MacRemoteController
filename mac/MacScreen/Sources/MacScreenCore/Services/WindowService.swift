@@ -24,25 +24,42 @@ public final class CGWindowService: WindowService {
         return Self.filterWindows(list, myPid: Int(ProcessInfo.processInfo.processIdentifier))
     }
 
+    /// 数值解析：兼容真实 CGWindowList 的 NSNumber 桥对象与 Swift 6 严格运行时
+    /// （SE-0436 后 `Swift 值类型 as? NSNumber` 返回 nil，须回退直接 as? Int/Double）。
+    static func numValue(_ v: Any?) -> Double? {
+        if let n = v as? NSNumber { return n.doubleValue }
+        if let i = v as? Int { return Double(i) }
+        if let d = v as? Double { return d }
+        return nil
+    }
+
     /// 过滤 CGWindowList 原始条目为可展示窗口（纯函数，供单元测试）。
     static func filterWindows(_ entries: [[String: Any]], myPid: Int) -> [WindowInfo] {
         var result: [WindowInfo] = []
         for entry in entries {
-            let layer = (entry[kCGWindowLayer as String] as? NSNumber)?.intValue ?? 0
+            let layer = Int(Self.numValue(entry[kCGWindowLayer as String]) ?? 0)
             guard layer == 0 else { continue } // 只看普通窗口层
-            let pid = (entry[kCGWindowOwnerPID as String] as? NSNumber)?.intValue ?? -1
+            let pid = Int(Self.numValue(entry[kCGWindowOwnerPID as String]) ?? -1)
             guard pid > 0, pid != myPid else { continue }
-            guard let id = (entry[kCGWindowNumber as String] as? NSNumber)?.intValue else { continue }
+            guard let idNum = Self.numValue(entry[kCGWindowNumber as String]) else { continue }
+            let id = Int(idNum)
             let owner = entry[kCGWindowOwnerName as String] as? String ?? ""
             // 窗口标题需要屏幕录制权限；无权限时退化为应用名
             let title = entry[kCGWindowName as String] as? String ?? owner
             guard let boundsDict = entry[kCGWindowBounds as String] as? [String: Any] else { continue }
-            let x = (boundsDict["X"] as? NSNumber)?.doubleValue ?? 0
-            let y = (boundsDict["Y"] as? NSNumber)?.doubleValue ?? 0
-            let w = (boundsDict["Width"] as? NSNumber)?.doubleValue ?? 0
-            let h = (boundsDict["Height"] as? NSNumber)?.doubleValue ?? 0
+            let x = Self.numValue(boundsDict["X"]) ?? 0
+            let y = Self.numValue(boundsDict["Y"]) ?? 0
+            let w = Self.numValue(boundsDict["Width"]) ?? 0
+            let h = Self.numValue(boundsDict["Height"]) ?? 0
             guard w >= 60, h >= 40 else { continue } // 过滤小面板
-            let onScreen = ((entry[kCGWindowIsOnscreen as String] as? NSNumber)?.boolValue) ?? true
+            let onScreen: Bool
+            if let n = entry[kCGWindowIsOnscreen as String] as? NSNumber {
+                onScreen = n.boolValue
+            } else if let b = entry[kCGWindowIsOnscreen as String] as? Bool {
+                onScreen = b
+            } else {
+                onScreen = true
+            }
             result.append(WindowInfo(id: id, title: title, appName: owner, pid: pid,
                                      x: x, y: y, w: w, h: h, onScreen: onScreen))
         }

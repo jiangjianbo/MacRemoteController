@@ -4,7 +4,11 @@ on:
   push:
     branches: [main]
 jobs:
-  diag:
+  diag-ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "actions ok $(uname -a)"
+      - run: echo "ubuntu ok $(uname -a)"
+  diag-macos:
+    runs-on: macos-14
+    steps:
+      - run: echo "macos-14 ok $(uname -a) && xcodebuild -version"

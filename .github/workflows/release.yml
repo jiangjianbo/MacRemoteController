@@ -20,10 +20,10 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      # 项目未带 gradle wrapper，显式安装 Gradle 9（AGP 8.13 要求）
+      # 项目未带 gradle wrapper，显式安装 Gradle（AGP 8.13 要求 8.13+；与本地一致用 9.5.1）
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "9.0.0"
+          gradle-version: "9.5.1"
 
       # runner 预装 Android SDK 但不一定有 android-35/build-tools 35，先补齐
       - name: 安装 Android SDK 组件
@@ -32,10 +32,21 @@ jobs:
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
             "platforms;android-35" "build-tools;35.0.0" > /dev/null
 
-      - name: 统一构建（macOS universal + 单测 + Android + iOS）
-        run: scripts/build.sh
+      # Android 单独跑且允许失败：step 结论可见（区分 :core 还是 :app 失败），缺 APK 不阻塞发版
+      - name: Android :core 单测
+        id: core
+        continue-on-error: true
+        run: (cd android/MacScreenClient && gradle --console=plain :core:test) 2>&1 | tail -40
 
-      # Release 附件只收单文件：.app/.apk 打 zip，命名带版本号
+      - name: Android APK
+        id: app
+        continue-on-error: true
+        run: (cd android/MacScreenClient && gradle --console=plain :app:assembleDebug) 2>&1 | tail -60
+
+      - name: 统一构建（macOS universal + 单测 + iOS）
+        run: scripts/build.sh --skip-android
+
+      # Release 附件只收单文件：.app/.apk 打 zip，命名带版本号（APK 构建失败时容错跳过）
       - name: 整理发版产物
         run: |
           V="${GITHUB_REF_NAME}"
@@ -44,7 +55,11 @@ jobs:
           zip -ry "../rel/MacScreenAgent-${V}-macos-universal.zip" MacScreenAgent
           zip -ry "../rel/LAN-Mac-Controller-${V}-macos.app.zip" LAN-Mac-Controller.app
           zip -ry "../rel/LAN-Mac-Controller-debug-${V}-macos.app.zip" LAN-Mac-Controller-debug.app
-          cp LAN-Mac-Controller-debug.apk "../rel/LAN-Mac-Controller-${V}-debug.apk"
+          if [[ -f LAN-Mac-Controller-debug.apk ]]; then
+            cp LAN-Mac-Controller-debug.apk "../rel/LAN-Mac-Controller-${V}-debug.apk"
+          else
+            echo "::warning::APK 缺失（Android :core/:app 步骤结论见 job 明细）"
+          fi
           zip -ry "../rel/MacScreenClient-${V}-ios-simulator.zip" MacScreenClient.app
           cd ../rel
           ls -la

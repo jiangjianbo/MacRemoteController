@@ -108,3 +108,14 @@
       （改 SwiftUI 层行数回调驱动 .frame(height:)）、纸飞机黑色图标浮在深色画布
       不可见（白底提到 HStack 整条）。新增 scripts/ios-build.sh 并接入 build.sh/
       clean.sh，dist/MacScreenClient.app（模拟器包）。真机部署：Xcode 自动签名。
+- [x] T40 窗口列表看不到全屏 Space 应用（用户反馈：最大化屏幕的 Mac 应用
+      不在手机窗口列表中，只能手动切屏才出现）。根因：CGWindowService 用
+      CGWindowListCopyWindowInfo(.optionOnScreenOnly) 只枚举当前 Space，
+      全屏应用独占独立 Space 故整个漏掉。修复：改 .optionAll 枚举全部
+      Space 的窗口（过滤逻辑抽纯函数 filterWindows 供单测），非当前 Space
+      窗口由既有 onScreen 字段标记；激活路径不变（app.activate + AXRaise
+      对其他 Space 窗口会自动切换）。真实系统验证：此前仅 2 个窗口可见，
+      修复后 17 个（iTerm2/微信/Typora/Edge/GitHub Desktop 等全出现）。
+      新增 WindowServiceTests 4 项，mac 端 91 tests 全过；dist 已重建。
+      注意：运行中的 agent 需重启才会用上新二进制（重建后首次投屏需重新
+      勾选屏幕录制授权）。

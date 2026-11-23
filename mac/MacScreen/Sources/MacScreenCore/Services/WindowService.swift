@@ -16,10 +16,18 @@ public final class CGWindowService: WindowService {
     public init() {}
 
     public func listWindows() -> [WindowInfo] {
-        let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] ?? []
-        let myPid = ProcessInfo.processInfo.processIdentifier
+        // .optionAll 枚举全部 Space 的窗口：全屏应用独占独立 Space，用
+        // .optionOnScreenOnly 会把它们整个漏掉（手机窗口列表看不到，必须手动
+        // 切屏才能出现）；非当前 Space 的窗口由 onScreen 标记，激活时 AXRaise
+        // /app.activate 会自动切过去。
+        let list = CGWindowListCopyWindowInfo([.optionAll], kCGNullWindowID) as? [[String: Any]] ?? []
+        return Self.filterWindows(list, myPid: Int(ProcessInfo.processInfo.processIdentifier))
+    }
+
+    /// 过滤 CGWindowList 原始条目为可展示窗口（纯函数，供单元测试）。
+    static func filterWindows(_ entries: [[String: Any]], myPid: Int) -> [WindowInfo] {
         var result: [WindowInfo] = []
-        for entry in list {
+        for entry in entries {
             let layer = (entry[kCGWindowLayer as String] as? NSNumber)?.intValue ?? 0
             guard layer == 0 else { continue } // 只看普通窗口层
             let pid = (entry[kCGWindowOwnerPID as String] as? NSNumber)?.intValue ?? -1

@@ -1,14 +1,32 @@
 import XCTest
 @testable import MacScreenCore
 
+/// 幂等 fulfill：mock 帧源按 fps 持续出帧，wait 返回到 stop 之间再来一帧
+/// 就构成多次 fulfill——旧 XCTest 只警告，Xcode 16 起抛
+/// NSInternalInconsistencyException 直接杀掉测试进程（CI 曾因此 signal 6）。
+final class FulfillOnce {
+    private let exp: XCTestExpectation
+    private let lock = NSLock()
+    private var done = false
+    init(_ exp: XCTestExpectation) { self.exp = exp }
+    func call() {
+        lock.lock()
+        let first = !done
+        done = true
+        lock.unlock()
+        if first { exp.fulfill() }
+    }
+}
+
 final class CaptureTests: XCTestCase {
     func testMockFrameSourceProducesValidJPEG() throws {
         let source = MockFrameSource(width: 640, height: 400, fps: 30)
         var frames: [Data] = []
         let got = expectation(description: "frame")
+        let fulfillOnce = FulfillOnce(got)
         source.onFrame = { data in
             frames.append(data)
-            got.fulfill()
+            fulfillOnce.call()
         }
         try source.start()
         wait(for: [got], timeout: 3)
@@ -38,16 +56,15 @@ final class CaptureTests: XCTestCase {
 
     func testJpegEncoderScalesDown() throws {
         let source = MockFrameSource(width: 800, height: 500)
-        var frame: CGImage?
         let got = expectation(description: "frame")
+        let fulfillOnce = FulfillOnce(got)
         source.onFrame = { _ in
             // 直接从 mock 源重新生成一帧拿 CGImage 太绕；改为手工构造大图测试缩放
-            got.fulfill()
+            fulfillOnce.call()
         }
         try source.start()
         wait(for: [got], timeout: 3)
         source.stop()
-        _ = frame
 
         let big = try XCTUnwrap(CGContext.makeTestImage(width: 2000, height: 1200))
         let small = try XCTUnwrap(JPEGEncoder.encode(big, quality: 0.7, maxWidth: 640))

@@ -37,8 +37,11 @@ if (cd "$IOS_DIR" && xcodebuild -project MacScreenClient.xcodeproj -scheme "$SCH
   echo "xcodebuild 通过"
 else
   APP_RC=$?
-  echo "!! xcodebuild 失败："
-  tail -30 "$BUILD_LOG"
+  echo "!! xcodebuild 失败（error 行）："
+  # 直接抓 error 行：xcodebuild 全量日志里单条命令行上万字符，tail 会把真正的错误挤掉
+  grep -E "error: " "$BUILD_LOG" | sort -u | head -20
+  echo "---- BUILD 结尾 ----"
+  tail -5 "$BUILD_LOG"
   rm -f "$BUILD_LOG"
   exit $APP_RC
 fi

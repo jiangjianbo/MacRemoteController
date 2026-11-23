@@ -4,7 +4,8 @@ import SwiftUI
 struct ConnectView: View {
     @EnvironmentObject var session: SessionModel
     @EnvironmentObject var settings: AppSettings
-    @StateObject private var discovery = DiscoveryBrowser()
+    // iOS 13 无 @StateObject（14+）；@ObservedObject 首次创建的实例会被 SwiftUI 保留
+    @ObservedObject private var discovery = DiscoveryBrowser()
     @State private var showQR = false
     @State private var qrMessage: String?
 

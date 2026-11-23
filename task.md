@@ -119,3 +119,10 @@
       新增 WindowServiceTests 4 项，mac 端 91 tests 全过；dist 已重建。
       注意：运行中的 agent 需重启才会用上新二进制（重建后首次投屏需重新
       勾选屏幕录制授权）。
+- [x] T41 GitHub Actions 发版：.github/workflows/release.yml（打 tag v* 或手动触发）。
+      macos-14 arm64 runner 复用 scripts/build.sh 一条龙（Mac universal 构建+91 单测、
+      Android :core:test+APK、iOS CoreLogic 29 单测+模拟器包、dist 归集）；CI 环境
+      用 setup-java(temurin 17) + setup-gradle(9.0.0，项目无 wrapper) + sdkmanager
+      补装 platforms;android-35/build-tools;35.0.0。产物 zip 化（裸二进制/release 应用包/
+      debug 应用包/APK/iOS 模拟器包，命名带版本号）+ SHA256SUMS.txt，gh release create
+      发 GitHub Release。首发 v0.1。

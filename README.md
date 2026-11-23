@@ -126,11 +126,27 @@ QR 内容：`macscreen://connect?host=..&port=..&token=..&name=..`。
 
 | 层 | 命令 | 当前状态 |
 |---|---|---|
-| Mac 单测 | `cd mac/MacScreen && swift test` | 86 tests, 0 failures（含 FileShare 回环下载集成测试） |
+| Mac 单测 | `cd mac/MacScreen && swift test` | 91 tests, 0 failures（含 FileShare 回环下载集成测试） |
 | Android core 单测 | `scripts/android-build.sh`（`:core:test`） | 38 tests, 0 failures |
 | iOS CoreLogic 单测 | `scripts/ios-build.sh`（`swift test`） | 29 tests, 0 failures（帧协议/鼠标映射/手势分类跨平台向量） |
 | iOS e2e | mock agent + 模拟器自动连接脚本 | connected/帧流/鼠标/文字/窗口列表断言全绿 |
 | 端到端 | `./scripts/e2e.sh`（真实 TCP：mock Agent ↔ PhoneSimulator） | HTTP 下载 1 + 正向 13 + 反向 2 断言全过 |
+
+## 发版（GitHub Actions）
+
+打 tag 即发版，CI 在 GitHub macOS runner 上跑同一条 `scripts/build.sh` 并把产物挂到 Release：
+
+```bash
+git tag v0.1 && git push origin v0.1    # 触发 .github/workflows/release.yml
+```
+
+产物（命名带版本号 + SHA256SUMS.txt）：
+
+- `MacScreenAgent-vX-macos-universal.zip` — release 裸二进制（x86_64+arm64）
+- `LAN-Mac-Controller-vX-macos.app.zip` — release 应用包（双击启动）
+- `LAN-Mac-Controller-debug-vX-macos.app.zip` — debug 应用包
+- `LAN-Mac-Controller-vX-debug.apk` — Android 客户端
+- `MacScreenClient-vX-ios-simulator.zip` — iOS 模拟器包（真机仍需 Xcode 自动签名）
 
 Mock 策略：两端核心逻辑均可在无硬件/无权限环境下验证（MockFrameSource、MockInputInjector、MockWindowService、FakeConnection、PipeTransport、FakeHttpPoster 等）。
 

@@ -1,0 +1,60 @@
+# 发版流水线：打 tag（v*）或手动触发 → 在 macOS runner 上统一构建全部产物并发布 GitHub Release。
+# 复用 scripts/build.sh（macOS universal + 单测 + Android APK + iOS 模拟器包 + dist 归集）。
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # gh release create 需要
+
+jobs:
+  release:
+    runs-on: macos-14   # arm64；Xcode 15.x（Swift 5.10 可编 5.6 语法，iOS 13 部署目标仍支持）
+    steps:
+      - uses: actions/checkout@v4
+
+      # build.sh 内 android-build.sh 依次探测 JAVA_HOME/常见路径，setup-java 直接命中
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # 项目未带 gradle wrapper，显式安装 Gradle 9（AGP 8.13 要求）
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "9.0.0"
+
+      # runner 预装 Android SDK 但不一定有 android-35/build-tools 35，先补齐
+      - name: 安装 Android SDK 组件
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            "platforms;android-35" "build-tools;35.0.0" > /dev/null
+
+      - name: 统一构建（macOS universal + 单测 + Android + iOS）
+        run: scripts/build.sh
+
+      # Release 附件只收单文件：.app/.apk 打 zip，命名带版本号
+      - name: 整理发版产物
+        run: |
+          V="${GITHUB_REF_NAME}"
+          mkdir -p rel
+          cd dist
+          zip -ry "../rel/MacScreenAgent-${V}-macos-universal.zip" MacScreenAgent
+          zip -ry "../rel/LAN-Mac-Controller-${V}-macos.app.zip" LAN-Mac-Controller.app
+          zip -ry "../rel/LAN-Mac-Controller-debug-${V}-macos.app.zip" LAN-Mac-Controller-debug.app
+          cp LAN-Mac-Controller-debug.apk "../rel/LAN-Mac-Controller-${V}-debug.apk"
+          zip -ry "../rel/MacScreenClient-${V}-ios-simulator.zip" MacScreenClient.app
+          cd ../rel
+          ls -la
+          shasum -a 256 * > SHA256SUMS.txt
+
+      - name: 发布 GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          V="${GITHUB_REF_NAME}"
+          gh release create "$V" --title "MacScreen $V" --generate-notes rel/*

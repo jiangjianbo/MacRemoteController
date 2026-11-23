@@ -1,5 +1,6 @@
-# 发版流水线：打 tag（v*）或手动触发 → 在 macOS runner 上统一构建全部产物并发布 GitHub Release。
+# 发版流水线：打 tag（v*）或手动触发 → 在 GitHub macOS runner 上统一构建全部产物并发布 GitHub Release。
 # 复用 scripts/build.sh（macOS universal + 单测 + Android APK + iOS 模拟器包 + dist 归集）。
+# 结构：build（macos-15，无特殊权限，产物传 artifact）+ publish（ubuntu，contents:write 发 Release）。
 name: Release
 
 on:
@@ -7,13 +8,9 @@ on:
     tags: ["v*"]
   workflow_dispatch:
 
-permissions:
-  contents: write   # gh release create 需要
-
 jobs:
-  release:
-    runs-on: macos-15   # arm64；Xcode 16.x（Swift 5 语言模式可编 5.6 语法，iOS 13 部署目标仍支持）
-                        # 注：macos-14 镜像对本账号不可用（job 秒取消），实测 ubuntu 正常
+  build:
+    runs-on: macos-15   # arm64；Xcode 16.x（Swift 5 语言模式向后兼容 5.6 语法，iOS 13 部署目标仍支持）
     steps:
       - uses: actions/checkout@v4
 
@@ -53,9 +50,26 @@ jobs:
           ls -la
           shasum -a 256 * > SHA256SUMS.txt
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-files
+          path: rel/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # gh release create 需要
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-files
+          path: rel/
+
       - name: 发布 GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           V="${GITHUB_REF_NAME}"
+          ls -la rel/
           gh release create "$V" --title "MacScreen $V" --generate-notes rel/*

@@ -12,7 +12,8 @@ permissions:
 
 jobs:
   release:
-    runs-on: macos-14   # arm64；Xcode 15.x（Swift 5.10 可编 5.6 语法，iOS 13 部署目标仍支持）
+    runs-on: macos-15   # arm64；Xcode 16.x（Swift 5 语言模式可编 5.6 语法，iOS 13 部署目标仍支持）
+                        # 注：macos-14 镜像对本账号不可用（job 秒取消），实测 ubuntu 正常
     steps:
       - uses: actions/checkout@v4
 
